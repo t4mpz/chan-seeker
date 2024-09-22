@@ -26,7 +26,11 @@ fn thread_test(){
 
 fn config_test(){
   config::create_config_ifn_exists();
-  println!("werks");
+  let mut cn = config::get_config();
+  println!("got config with {} host", cn.host);
+  cn.user = "test".to_string();
+  config::save_config(cn);
+  println!("Saved new config settings");
 }
 
 

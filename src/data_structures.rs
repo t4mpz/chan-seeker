@@ -15,11 +15,11 @@ pub struct Thread{
 }
 
 #[derive(Deserialize, Serialize)]
-pub struct Conf<'a>{
-  pub host: &'a str,
-  pub user: &'a str,
-  pub password: &'a str,
-  pub db: &'a str
+pub struct Conf{
+  pub host: String,
+  pub user: String,
+  pub password: String,
+  pub db: String
 }
 // this one is another major problem
 // I'll rewrite it soon just let me get some sleep
