@@ -1,14 +1,6 @@
 pub mod requester {
   use fantoccini::wd::Capabilities;
 
-
-  pub fn fix_thread_url(thread_url: String) -> String{
-    if thread_url.contains("//") && !thread_url.contains("https://"){
-      return thread_url.replace("//", "https://");
-    }
-    else{ return thread_url;}
-  }
-
   #[tokio::main]
   pub async fn get_url(url: String) -> Result<String, Box<dyn std::error::Error>>{
     let cap: Capabilities = serde_json::from_str(r#"{"browserName":"chrome","goog:chromeOptions":{"args":["--headless"]}}"#,).unwrap();
