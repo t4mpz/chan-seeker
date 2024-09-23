@@ -21,5 +21,3 @@ pub struct Conf{
   pub password: String,
   pub db: String
 }
-// this one is another major problem
-// I'll rewrite it soon just let me get some sleep

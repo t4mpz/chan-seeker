@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS threads(
+  thread_id SERIAL,
+  title TEXT NOT NULL,
+  thread_url TEXT NOT NULL,
+  image_url TEXT NOT NULL,
+  storaged_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS replys(
+  reply_id SERIAL,
+  thread INT NOT NULL,
+  content TEXT NOT NULL,
+  image_url TEXT DEFAULT NULL,
+  is_op BOOLEAN NOT NULL,
+  storaged_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
