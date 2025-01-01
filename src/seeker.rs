@@ -32,14 +32,14 @@ pub fn parse_html_reply(content: &str, is_op: Option<bool>) -> ThreadReply{
 }
 
 pub fn get_thread_responses(thread_content: &str) -> Vec<ThreadReply>{
-let threads_selector = Selector::parse(".postContainer").unwrap();
-let thread_page = Html::parse_document(&thread_content);
-return thread_page.select(&threads_selector)
-.map(|thread| {
-  let is_op = thread.value().classes().collect::<String>().contains("opContainer");
-  parse_html_reply(&thread.inner_html(), Some(is_op))
-})
-.collect();
+  let threads_selector = Selector::parse(".postContainer").unwrap();
+  let thread_page = Html::parse_document(&thread_content);
+  return thread_page.select(&threads_selector)
+  .map(|thread| {
+    let is_op = thread.value().classes().collect::<String>().contains("opContainer");
+    parse_html_reply(&thread.inner_html(), Some(is_op))
+  })
+  .collect();
 }
 
 pub fn list_threads(content: &str) -> Vec<Thread>{
