@@ -88,3 +88,7 @@ pub fn save_config(conf: Conf){
   }
 }
 
+pub fn generate_sqlx_url(conf: Conf) -> String{
+  format!("postgres://{0}:{1}@{2}:6611/{3}", conf.user, conf.password, conf.host, conf.db).to_string()
+}
+

@@ -1,7 +1,10 @@
+use sqlx::Pool;
+
 mod requester;
 mod seeker;
 mod data_structures;
 mod config;
+mod psql_connection;
 
 
 pub fn fix_thread_url(thread_url: String) -> String{
@@ -33,7 +36,29 @@ fn config_test(){
   println!("Saved new config settings");
 }
 
+async fn sqlx_test(pool: Pool<sqlx::Postgres>) -> Result<(), sqlx::Error>{
+  // config::create_config_ifn_exists();
+  let thread = data_structures::Thread {
+    url: "https://4chan.org/g/thread/82198u483".to_string(),
+    title: "teste".to_string(),
+    image_href: "teste".to_string(),
+    reply: Vec::new()
+  };
+  println!("Apperently connected");
+  let _ = psql_connection::psql_connection::add_thread(&pool, thread).await;
+  Ok(())
+}
 
-fn main() {
-  config_test();
+#[tokio::main]
+async fn main() -> Result<(), sqlx::Error> {
+  let cn = config::get_config();
+  let url = config::generate_sqlx_url(cn);
+  println!("Created url");
+  println!("{}", url);
+  let pool = psql_connection::psql_connection::gen_pol(&url).await;
+  println!("Probably connected");
+  let _ = sqlx_test(pool).await;
+  println!("Probably written dunno :P");
+ 
+  Ok(())
 }

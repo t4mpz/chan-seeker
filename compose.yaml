@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: exemplo
     volumes:
-      - .:/home/giulliano/Documentos/Projetos/chan-seeker/schema.sql
+      - ./schema.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 6611:5432
     
